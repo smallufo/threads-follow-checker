@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Threads Follow Checker</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #fafafa;
+      color: #333;
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    h2 { font-size: 18px; margin-top: 32px; margin-bottom: 8px; color: #111; }
+    p, li { font-size: 15px; margin-bottom: 12px; }
+    ul { padding-left: 24px; }
+    .date { color: #888; font-size: 13px; margin-bottom: 32px; }
+    hr { border: none; border-top: 1px solid #ddd; margin: 48px 0; }
+    .lang-switch { text-align: right; margin-bottom: 20px; font-size: 14px; }
+    .lang-switch a { color: #1877f2; text-decoration: none; }
+    .lang-switch a:hover { text-decoration: underline; }
+    section { margin-bottom: 24px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- English -->
+  <div id="en">
+    <div class="lang-switch"><a href="#zh">中文版</a></div>
+
+    <h1>Privacy Policy</h1>
+    <p class="date">Threads Follow Checker &mdash; Last updated: 2026-03-26</p>
+
+    <section>
+      <h2>Overview</h2>
+      <p>Threads Follow Checker is a browser extension that helps you see which accounts you follow on Threads also follow you back. We are committed to protecting your privacy.</p>
+    </section>
+
+    <section>
+      <h2>Data Collection</h2>
+      <p><strong>We do not collect, transmit, or store any personal data on external servers.</strong></p>
+      <p>All data processed by this extension stays entirely on your local device.</p>
+    </section>
+
+    <section>
+      <h2>What Data Is Stored Locally</h2>
+      <p>The extension stores the following data in your browser's local storage (<code>chrome.storage.local</code>):</p>
+      <ul>
+        <li>A list of usernames and display names from your Following list</li>
+        <li>A list of usernames and display names from your Followers list</li>
+      </ul>
+      <p>This data is used solely to generate the follow-back comparison report. You can clear all stored data at any time using the "Clear Data" button in the extension popup.</p>
+    </section>
+
+    <section>
+      <h2>Permissions Used</h2>
+      <ul>
+        <li><strong>activeTab</strong> &mdash; To read the follower/following list from the currently active Threads page. Only activated when you explicitly click a scan button.</li>
+        <li><strong>storage</strong> &mdash; To save scan results locally so you don't have to re-scan every time.</li>
+        <li><strong>Host permission (threads.com / threads.net)</strong> &mdash; The content script runs only on Threads pages to enable auto-scrolling and username collection.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Third-Party Services</h2>
+      <p>This extension does not use any third-party analytics, tracking, or advertising services. No data is sent to any external server.</p>
+    </section>
+
+    <section>
+      <h2>Changes to This Policy</h2>
+      <p>If we make changes to this privacy policy, we will update this page with the new date. Continued use of the extension after changes constitutes acceptance of the updated policy.</p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>If you have questions about this privacy policy, please open an issue on our <a href="https://github.com/smallufo/threads-follow-checker/issues">GitHub repository</a>.</p>
+    </section>
+  </div>
+
+  <hr>
+
+  <!-- 中文 -->
+  <div id="zh">
+    <div class="lang-switch"><a href="#en">English Version</a></div>
+
+    <h1>隱私權政策</h1>
+    <p class="date">Threads Follow Checker &mdash; 最後更新：2026-03-26</p>
+
+    <section>
+      <h2>概述</h2>
+      <p>Threads Follow Checker 是一個瀏覽器擴充功能，幫助您查看在 Threads 上追蹤的帳號是否也有追蹤您。我們致力於保護您的隱私。</p>
+    </section>
+
+    <section>
+      <h2>資料收集</h2>
+      <p><strong>我們不會收集、傳輸或將任何個人資料儲存在外部伺服器上。</strong></p>
+      <p>本擴充功能處理的所有資料都完全保留在您的本地裝置上。</p>
+    </section>
+
+    <section>
+      <h2>本地儲存的資料</h2>
+      <p>本擴充功能使用瀏覽器的本地儲存空間（<code>chrome.storage.local</code>）儲存以下資料：</p>
+      <ul>
+        <li>您的追蹤名單中的用戶名和顯示名稱</li>
+        <li>您的粉絲名單中的用戶名和顯示名稱</li>
+      </ul>
+      <p>這些資料僅用於產生追蹤回追比對報告。您可以隨時透過擴充功能彈出視窗中的「清除資料」按鈕刪除所有已儲存的資料。</p>
+    </section>
+
+    <section>
+      <h2>使用的權限</h2>
+      <ul>
+        <li><strong>activeTab</strong> &mdash; 用於讀取目前 Threads 頁面上的追蹤/粉絲列表。僅在您主動點擊掃描按鈕時啟用。</li>
+        <li><strong>storage</strong> &mdash; 用於在本地儲存掃描結果，以便您不必每次都重新掃描。</li>
+        <li><strong>網站權限（threads.com / threads.net）</strong> &mdash; 內容腳本僅在 Threads 頁面上運行，以實現自動滾動和用戶名收集。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>第三方服務</h2>
+      <p>本擴充功能不使用任何第三方分析、追蹤或廣告服務。不會將任何資料傳送到任何外部伺服器。</p>
+    </section>
+
+    <section>
+      <h2>政策變更</h2>
+      <p>如果我們對本隱私權政策進行變更，我們將更新此頁面及日期。在變更後繼續使用本擴充功能即表示接受更新後的政策。</p>
+    </section>
+
+    <section>
+      <h2>聯絡方式</h2>
+      <p>如果您對本隱私權政策有任何疑問，請在我們的 <a href="https://github.com/smallufo/threads-follow-checker/issues">GitHub 儲存庫</a>提出 issue。</p>
+    </section>
+  </div>
+
+</div>
+
+</body>
+</html>
