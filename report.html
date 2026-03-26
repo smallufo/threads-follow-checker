@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html data-i18n-title="reportPageTitle">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +9,24 @@
 <body>
   <div id="app">
     <header>
-      <h1>Threads Follow Checker</h1>
-      <p class="subtitle">追蹤回追報告</p>
+      <h1 data-i18n="reportTitle">Threads Follow Checker</h1>
+      <p class="subtitle" data-i18n="reportSubtitle">Follow-back Report</p>
     </header>
 
-    <div id="loading">載入資料中...</div>
+    <div id="loading" data-i18n="loading">Loading data...</div>
 
     <div id="content" style="display:none;">
       <div id="summary" class="summary"></div>
 
       <div class="toolbar">
         <div id="filter-bar">
-          <button class="filter-btn active" data-filter="all">全部</button>
-          <button class="filter-btn" data-filter="not-following-back">未回追</button>
-          <button class="filter-btn" data-filter="following-back">有回追</button>
+          <button class="filter-btn active" data-filter="all" data-i18n="filterAll">All</button>
+          <button class="filter-btn" data-filter="not-following-back" data-i18n="filterNotFollowingBack">Not following back</button>
+          <button class="filter-btn" data-filter="following-back" data-i18n="filterFollowingBack">Following back</button>
         </div>
         <div class="actions">
-          <input type="text" id="search" placeholder="搜尋用戶名或顯示名稱..." />
-          <button id="btn-export" class="btn btn-secondary">匯出 CSV</button>
+          <input type="text" id="search" placeholder="Search username or display name..." data-i18n-placeholder="searchPlaceholder" />
+          <button id="btn-export" class="btn btn-secondary" data-i18n="btnExportCsv">Export CSV</button>
         </div>
       </div>
 
@@ -34,9 +34,9 @@
         <table id="report-table">
           <thead>
             <tr>
-              <th class="col-num">#</th>
-              <th class="col-user">用戶名 / 顯示名稱</th>
-              <th class="col-status">回追狀態</th>
+              <th class="col-num" data-i18n="colNum">#</th>
+              <th class="col-user" data-i18n="colUsername">Username / Display Name</th>
+              <th class="col-status" data-i18n="colStatus">Follow-back Status</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -49,9 +49,10 @@
     </div>
 
     <div id="no-data" style="display:none;">
-      <p>尚無資料。請先透過 Extension 彈出視窗掃描 Following 和 Followers 名單。</p>
+      <p data-i18n="noData">No data yet. Please scan Following and Followers lists via the extension popup first.</p>
     </div>
   </div>
+  <script src="i18n.js"></script>
   <script src="report.js"></script>
 </body>
 </html>

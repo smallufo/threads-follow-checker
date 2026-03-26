@@ -7,13 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const followersStatus = document.getElementById("followers-status");
   const tabHint = document.getElementById("tab-hint");
 
+  function statusHtml(cls, text) {
+    return `<span class="${cls}">${text}</span>`;
+  }
+
   // Load saved data counts on popup open
   chrome.storage.local.get(["followingList", "followersList"], (data) => {
     if (data.followingList && data.followingList.length > 0) {
-      followingStatus.innerHTML = `<span class="done">已收集 <span class="count">${data.followingList.length}</span> 位</span>`;
+      followingStatus.innerHTML = statusHtml("done", msg("statusCollected", [String(data.followingList.length)]));
     }
     if (data.followersList && data.followersList.length > 0) {
-      followersStatus.innerHTML = `<span class="done">已收集 <span class="count">${data.followersList.length}</span> 位</span>`;
+      followersStatus.innerHTML = statusHtml("done", msg("statusCollected", [String(data.followersList.length)]));
     }
     if (data.followingList?.length > 0 || data.followersList?.length > 0) {
       btnClear.style.display = "inline-block";
@@ -42,24 +46,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function setTabState(activeTab) {
-    // Reset
     btnScanFollowing.disabled = false;
     btnScanFollowers.disabled = false;
 
     if (activeTab === "no-threads") {
-      tabHint.innerHTML = `<span class="hint-warn">請先開啟 Threads 頁面</span>`;
+      tabHint.innerHTML = statusHtml("hint-warn", msg("hintNoThreads"));
       btnScanFollowing.disabled = true;
       btnScanFollowers.disabled = true;
     } else if (activeTab === "none" || activeTab === "no-modal") {
-      tabHint.innerHTML = `<span class="hint-warn">未偵測到追蹤列表，請先打開「粉絲」或「追蹤中」</span>`;
+      tabHint.innerHTML = statusHtml("hint-warn", msg("hintNoModal"));
       btnScanFollowing.disabled = true;
       btnScanFollowers.disabled = true;
     } else if (activeTab === "following") {
-      tabHint.innerHTML = `<span class="hint-ok">目前在「追蹤中」分頁</span>`;
+      tabHint.innerHTML = statusHtml("hint-ok", msg("hintOnFollowing"));
       btnScanFollowing.disabled = false;
       btnScanFollowers.disabled = true;
     } else if (activeTab === "followers") {
-      tabHint.innerHTML = `<span class="hint-ok">目前在「粉絲」分頁</span>`;
+      tabHint.innerHTML = statusHtml("hint-ok", msg("hintOnFollowers"));
       btnScanFollowing.disabled = true;
       btnScanFollowers.disabled = false;
     }
@@ -67,19 +70,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function sendScanMessage(type, statusEl, btn) {
     btn.disabled = true;
-    statusEl.innerHTML = `<span class="scanning">掃描中... 請勿關閉 Threads 頁面</span>`;
+    statusEl.innerHTML = statusHtml("scanning", msg("statusScanning"));
 
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tab = tabs[0];
       if (!tab || !tab.url || !(tab.url.includes("threads.net") || tab.url.includes("threads.com"))) {
-        statusEl.innerHTML = `<span class="error">請先開啟 Threads 頁面</span>`;
+        statusEl.innerHTML = statusHtml("error", msg("errorNoThreadsPage"));
         btn.disabled = false;
         return;
       }
 
       chrome.tabs.sendMessage(tab.id, { action: "scan", type }, (response) => {
         if (chrome.runtime.lastError) {
-          statusEl.innerHTML = `<span class="error">無法連接頁面，請重新整理 Threads 頁面後再試</span>`;
+          statusEl.innerHTML = statusHtml("error", msg("errorCannotConnect"));
           btn.disabled = false;
           return;
         }
@@ -98,16 +101,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!progress) return;
 
         if (progress.status === "scanning") {
-          statusEl.innerHTML = `<span class="scanning">掃描中... 已找到 <span class="count">${progress.count}</span> 位</span>`;
+          statusEl.innerHTML = statusHtml("scanning", msg("statusScanningCount", [String(progress.count)]));
         } else if (progress.status === "done") {
           const list = data[listKey] || [];
-          statusEl.innerHTML = `<span class="done">完成！共收集 <span class="count">${list.length}</span> 位</span>`;
+          statusEl.innerHTML = statusHtml("done", msg("statusDone", [String(list.length)]));
           btn.disabled = false;
           btnClear.style.display = "inline-block";
           clearInterval(interval);
           chrome.storage.local.remove(key);
         } else if (progress.status === "error") {
-          statusEl.innerHTML = `<span class="error">${progress.message || "掃描失敗"}</span>`;
+          statusEl.innerHTML = statusHtml("error", progress.message || msg("errorScanFailed"));
           btn.disabled = false;
           clearInterval(interval);
           chrome.storage.local.remove(key);
@@ -128,11 +131,11 @@ document.addEventListener("DOMContentLoaded", () => {
   btnReport.addEventListener("click", () => {
     chrome.storage.local.get(["followingList", "followersList"], (data) => {
       if (!data.followingList || data.followingList.length === 0) {
-        alert("請先掃描 Following 名單");
+        alert(msg("alertScanFollowingFirst"));
         return;
       }
       if (!data.followersList || data.followersList.length === 0) {
-        alert("請先掃描 Followers 名單");
+        alert(msg("alertScanFollowersFirst"));
         return;
       }
       chrome.tabs.create({ url: chrome.runtime.getURL("report.html") });
@@ -141,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Clear data
   btnClear.addEventListener("click", () => {
-    if (!confirm("確定要清除所有已收集的資料嗎？")) return;
+    if (!confirm(msg("confirmClearData"))) return;
     chrome.storage.local.remove(["followingList", "followersList"], () => {
       followingStatus.innerHTML = "";
       followersStatus.innerHTML = "";

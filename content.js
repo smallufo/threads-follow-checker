@@ -149,7 +149,7 @@
       const scrollContainer = findScrollContainer();
       if (!scrollContainer) {
         updateProgress(progressKey, "error", 0,
-          "找不到追蹤列表。請確認已打開「追蹤中」或「粉絲」的彈窗列表。");
+          chrome.i18n.getMessage("errorNoList"));
         return;
       }
 

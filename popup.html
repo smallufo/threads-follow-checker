@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html data-i18n-title="popupTitle">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +9,8 @@
 <body>
   <div id="app">
     <header>
-      <h1>Threads Follow Checker</h1>
-      <p class="subtitle">檢查追蹤對象是否有回追你</p>
+      <h1 data-i18n="popupTitle">Threads Follow Checker</h1>
+      <p class="subtitle" data-i18n="popupSubtitle">Check if your followings follow you back</p>
     </header>
 
     <!-- Tab detection hint -->
@@ -20,10 +20,10 @@
     <section id="step1" class="step">
       <div class="step-header">
         <span class="step-num">1</span>
-        <span class="step-title">掃描你的追蹤名單 (Following)</span>
+        <span class="step-title" data-i18n="step1Title">Scan your Following list</span>
       </div>
-      <p class="step-desc">請先在 Threads 開啟你的個人檔案，點擊「追蹤中」打開列表，然後按下方按鈕。</p>
-      <button id="btn-scan-following" class="btn btn-primary">開始掃描 Following</button>
+      <p class="step-desc" data-i18n="step1Desc">Open your Threads profile, tap "Following" to open the list, then click the button below.</p>
+      <button id="btn-scan-following" class="btn btn-primary" data-i18n="btnScanFollowing">Scan Following</button>
       <div id="following-status" class="status"></div>
     </section>
 
@@ -31,10 +31,10 @@
     <section id="step2" class="step">
       <div class="step-header">
         <span class="step-num">2</span>
-        <span class="step-title">掃描你的粉絲名單 (Followers)</span>
+        <span class="step-title" data-i18n="step2Title">Scan your Followers list</span>
       </div>
-      <p class="step-desc">現在請點擊「粉絲」打開列表，然後按下方按鈕。</p>
-      <button id="btn-scan-followers" class="btn btn-primary">開始掃描 Followers</button>
+      <p class="step-desc" data-i18n="step2Desc">Now tap "Followers" to open the list, then click the button below.</p>
+      <button id="btn-scan-followers" class="btn btn-primary" data-i18n="btnScanFollowers">Scan Followers</button>
       <div id="followers-status" class="status"></div>
     </section>
 
@@ -42,12 +42,13 @@
     <section id="step3" class="step">
       <div class="step-header">
         <span class="step-num">3</span>
-        <span class="step-title">產生報告</span>
+        <span class="step-title" data-i18n="step3Title">Generate Report</span>
       </div>
-      <button id="btn-report" class="btn btn-accent">產生報告 (開新分頁)</button>
-      <button id="btn-clear" class="btn btn-danger" style="display:none;">清除資料</button>
+      <button id="btn-report" class="btn btn-accent" data-i18n="btnReport">Generate Report (new tab)</button>
+      <button id="btn-clear" class="btn btn-danger" style="display:none;" data-i18n="btnClear">Clear Data</button>
     </section>
   </div>
+  <script src="i18n.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

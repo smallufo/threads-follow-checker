@@ -6,7 +6,6 @@
   let currentFilter = "all";
 
   // Load data from storage and build report
-  // Data format: [{username, displayName}, ...]
   chrome.storage.local.get(["followingList", "followersList"], (data) => {
     document.getElementById("loading").style.display = "none";
 
@@ -47,19 +46,19 @@
     document.getElementById("summary").innerHTML = `
       <div class="stat">
         <span class="big-num blue">${totalFollowing}</span>
-        <span class="label">追蹤中</span>
+        <span class="label">${msg("statFollowing")}</span>
       </div>
       <div class="stat">
         <span class="big-num blue">${totalFollowers}</span>
-        <span class="label">粉絲</span>
+        <span class="label">${msg("statFollowers")}</span>
       </div>
       <div class="stat">
         <span class="big-num green">${totalFollowBack}</span>
-        <span class="label">有回追</span>
+        <span class="label">${msg("statFollowBack")}</span>
       </div>
       <div class="stat">
         <span class="big-num red">${totalNotFollowBack}</span>
-        <span class="label">未回追</span>
+        <span class="label">${msg("statNotFollowBack")}</span>
       </div>
     `;
 
@@ -102,15 +101,15 @@
           ${nameHtml}
         </td>
         <td>${row.followsBack
-          ? '<span class="badge badge-yes">有回追</span>'
-          : '<span class="badge badge-no">未回追</span>'
+          ? `<span class="badge badge-yes">${msg("badgeYes")}</span>`
+          : `<span class="badge badge-no">${msg("badgeNo")}</span>`
         }</td>
       `;
       tbody.appendChild(tr);
     });
 
     document.getElementById("shown-count").textContent =
-      `顯示 ${filtered.length} / ${reportData.length} 位`;
+      msg("shownCount", [String(filtered.length), String(reportData.length)]);
   }
 
   function escapeHtml(str) {
@@ -128,7 +127,7 @@
     renderTable();
   });
 
-  // Search (also searches display name)
+  // Search
   searchInput.addEventListener("input", () => {
     renderTable();
   });
@@ -137,7 +136,7 @@
   document.getElementById("btn-export").addEventListener("click", () => {
     const filtered = getFiltered();
     if (filtered.length === 0) {
-      alert("目前沒有資料可匯出");
+      alert(msg("alertNoDataExport"));
       return;
     }
     const header = "Username,DisplayName,FollowsBack";

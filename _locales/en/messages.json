@@ -1,0 +1,162 @@
+{
+  "extName": {
+    "message": "Threads Follow Checker"
+  },
+  "extDescription": {
+    "message": "Check if people you follow on Threads also follow you back"
+  },
+  "popupTitle": {
+    "message": "Threads Follow Checker"
+  },
+  "popupSubtitle": {
+    "message": "Check if your followings follow you back"
+  },
+  "step1Title": {
+    "message": "Scan your Following list"
+  },
+  "step1Desc": {
+    "message": "Open your Threads profile, tap \"Following\" to open the list, then click the button below."
+  },
+  "btnScanFollowing": {
+    "message": "Scan Following"
+  },
+  "step2Title": {
+    "message": "Scan your Followers list"
+  },
+  "step2Desc": {
+    "message": "Now tap \"Followers\" to open the list, then click the button below."
+  },
+  "btnScanFollowers": {
+    "message": "Scan Followers"
+  },
+  "step3Title": {
+    "message": "Generate Report"
+  },
+  "btnReport": {
+    "message": "Generate Report (new tab)"
+  },
+  "btnClear": {
+    "message": "Clear Data"
+  },
+  "statusCollected": {
+    "message": "Collected $COUNT$ users",
+    "placeholders": {
+      "count": { "content": "$1", "example": "123" }
+    }
+  },
+  "statusScanning": {
+    "message": "Scanning... do not close the Threads page"
+  },
+  "statusScanningCount": {
+    "message": "Scanning... found $COUNT$ users",
+    "placeholders": {
+      "count": { "content": "$1", "example": "42" }
+    }
+  },
+  "statusDone": {
+    "message": "Done! Collected $COUNT$ users",
+    "placeholders": {
+      "count": { "content": "$1", "example": "150" }
+    }
+  },
+  "errorScanFailed": {
+    "message": "Scan failed"
+  },
+  "errorNoThreadsPage": {
+    "message": "Please open a Threads page first"
+  },
+  "errorCannotConnect": {
+    "message": "Cannot connect to the page. Please refresh the Threads page and try again."
+  },
+  "errorNoList": {
+    "message": "Cannot find the follow list. Please make sure the Following or Followers list is open."
+  },
+  "hintNoThreads": {
+    "message": "Please open a Threads page first"
+  },
+  "hintNoModal": {
+    "message": "No follow list detected. Please open \"Followers\" or \"Following\" first."
+  },
+  "hintOnFollowing": {
+    "message": "Currently on the \"Following\" tab"
+  },
+  "hintOnFollowers": {
+    "message": "Currently on the \"Followers\" tab"
+  },
+  "alertScanFollowingFirst": {
+    "message": "Please scan the Following list first"
+  },
+  "alertScanFollowersFirst": {
+    "message": "Please scan the Followers list first"
+  },
+  "confirmClearData": {
+    "message": "Are you sure you want to clear all collected data?"
+  },
+  "reportPageTitle": {
+    "message": "Threads Follow Checker - Report"
+  },
+  "reportTitle": {
+    "message": "Threads Follow Checker"
+  },
+  "reportSubtitle": {
+    "message": "Follow-back Report"
+  },
+  "loading": {
+    "message": "Loading data..."
+  },
+  "filterAll": {
+    "message": "All"
+  },
+  "filterNotFollowingBack": {
+    "message": "Not following back"
+  },
+  "filterFollowingBack": {
+    "message": "Following back"
+  },
+  "searchPlaceholder": {
+    "message": "Search username or display name..."
+  },
+  "btnExportCsv": {
+    "message": "Export CSV"
+  },
+  "colNum": {
+    "message": "#"
+  },
+  "colUsername": {
+    "message": "Username / Display Name"
+  },
+  "colStatus": {
+    "message": "Follow-back Status"
+  },
+  "noData": {
+    "message": "No data yet. Please scan Following and Followers lists via the extension popup first."
+  },
+  "statFollowing": {
+    "message": "Following"
+  },
+  "statFollowers": {
+    "message": "Followers"
+  },
+  "statFollowBack": {
+    "message": "Follow back"
+  },
+  "statNotFollowBack": {
+    "message": "Not following back"
+  },
+  "badgeYes": {
+    "message": "Follows back"
+  },
+  "badgeNo": {
+    "message": "Not following back"
+  },
+  "shownCount": {
+    "message": "Showing $SHOWN$ / $TOTAL$ users",
+    "placeholders": {
+      "shown": { "content": "$1", "example": "10" },
+      "total": { "content": "$2", "example": "50" }
+    }
+  },
+  "alertNoDataExport": {
+    "message": "No data to export"
+  }
+}

@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Threads Follow Checker",
+  "name": "__MSG_extName__",
   "version": "1.0.0",
-  "description": "Check if people you follow on Threads also follow you back",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
   "permissions": ["activeTab", "storage"],
   "action": {
     "default_popup": "popup.html",
