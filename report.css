@@ -23,6 +23,29 @@ header {
   margin-bottom: 28px;
 }
 
+.promo-banner {
+  text-align: center;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #999;
+}
+
+.promo-banner a {
+  color: #6ea8fe;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.promo-banner a:hover {
+  text-decoration: underline;
+  color: #9ec5fe;
+}
+
 header h1 {
   font-size: 22px;
   font-weight: 700;

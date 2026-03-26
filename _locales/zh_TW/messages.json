@@ -158,5 +158,14 @@
   },
   "alertNoDataExport": {
     "message": "目前沒有資料可匯出"
+  },
+  "promoPrefix": {
+    "message": "推薦："
+  },
+  "promoName": {
+    "message": "AI算命大師"
+  },
+  "promoUrl": {
+    "message": "https://ai.destiny.to/commercial/destiny"
   }
 }

@@ -13,6 +13,12 @@ function applyI18n() {
     const msg = chrome.i18n.getMessage(titleKey);
     if (msg) document.title = msg;
   }
+  // Set promo link href from i18n
+  const promoLink = document.getElementById("promo-link");
+  if (promoLink) {
+    const url = chrome.i18n.getMessage("promoUrl");
+    if (url) promoLink.href = url;
+  }
 }
 
 // Shorthand
