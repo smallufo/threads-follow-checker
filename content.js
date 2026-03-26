@@ -357,24 +357,36 @@
       }
     }
 
-    // Filter out the username itself, button text, and common UI strings
+    // Filter out the username itself, button text, badge text, and common UI strings
     const skipTexts = new Set([
       username,
       "@" + username,
       "追蹤中", "追蹤", "追蹤對方", "移除", "Follow", "Following", "Unfollow",
       "Remove", "粉絲", "已要求",
+      "已驗證", "Verified",  // verified badge text
     ]);
 
+    const candidates = [];
     for (const text of textNodes) {
       if (skipTexts.has(text)) continue;
       if (text === username) continue;
-      // Skip if it looks like a username (alphanumeric + dots/underscores only)
+      // Skip if it matches the username (case-insensitive)
       if (/^[a-zA-Z0-9_.]+$/.test(text) && text.toLowerCase() === username.toLowerCase()) continue;
-      // This is likely the display name
-      return text;
+      candidates.push(text);
     }
 
-    return "";
+    if (candidates.length === 0) return "";
+
+    // Prefer the candidate that looks most like a display name:
+    // - Not purely ASCII alphanumeric (those are likely usernames)
+    // - Contains CJK characters, spaces, or mixed case
+    for (const c of candidates) {
+      if (/[^\x00-\x7F]/.test(c)) return c;  // has non-ASCII (CJK, etc.)
+    }
+    for (const c of candidates) {
+      if (/\s/.test(c)) return c;  // has spaces (e.g. "John Smith")
+    }
+    return candidates[0];
   }
 
   function isReservedPath(path) {
