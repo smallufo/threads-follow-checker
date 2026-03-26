@@ -198,6 +198,13 @@ header h1 {
   text-decoration: underline;
 }
 
+.display-name {
+  display: block;
+  color: #888;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
 /* Footer */
 #footer {
   text-align: center;

@@ -97,6 +97,25 @@ header h1 {
 .btn-accent { background: #00c853; color: #000; }
 .btn-danger { background: #d32f2f; color: #fff; }
 
+.tab-hint {
+  text-align: center;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  min-height: 18px;
+}
+
+.tab-hint:empty { display: none; }
+
+.hint-ok {
+  color: #00c853;
+}
+
+.hint-warn {
+  color: #ffab00;
+}
+
 .status {
   margin-top: 8px;
   font-size: 12px;

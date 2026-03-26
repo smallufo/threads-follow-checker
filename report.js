@@ -6,6 +6,7 @@
   let currentFilter = "all";
 
   // Load data from storage and build report
+  // Data format: [{username, displayName}, ...]
   chrome.storage.local.get(["followingList", "followersList"], (data) => {
     document.getElementById("loading").style.display = "none";
 
@@ -17,12 +18,20 @@
       return;
     }
 
-    const followersSet = new Set(followers.map((u) => u.toLowerCase()));
+    // Build followers lookup — handle both old format (string[]) and new format ({username, displayName}[])
+    const followersSet = new Set(
+      followers.map((f) => (typeof f === "string" ? f : f.username).toLowerCase())
+    );
 
-    reportData = following.map((username) => ({
-      username,
-      followsBack: followersSet.has(username.toLowerCase()),
-    }));
+    reportData = following.map((f) => {
+      const username = typeof f === "string" ? f : f.username;
+      const displayName = typeof f === "string" ? "" : (f.displayName || "");
+      return {
+        username,
+        displayName,
+        followsBack: followersSet.has(username.toLowerCase()),
+      };
+    });
 
     // Sort: not following back first, then alphabetical
     reportData.sort((a, b) => {
@@ -68,7 +77,10 @@
 
     const query = searchInput.value.trim().toLowerCase();
     if (query) {
-      filtered = filtered.filter((r) => r.username.toLowerCase().includes(query));
+      filtered = filtered.filter((r) =>
+        r.username.toLowerCase().includes(query) ||
+        r.displayName.toLowerCase().includes(query)
+      );
     }
 
     return filtered;
@@ -80,9 +92,15 @@
 
     filtered.forEach((row, i) => {
       const tr = document.createElement("tr");
+      const nameHtml = row.displayName
+        ? `<span class="display-name">${escapeHtml(row.displayName)}</span>`
+        : "";
       tr.innerHTML = `
         <td>${i + 1}</td>
-        <td><a class="username-link" href="https://www.threads.com/@${row.username}" target="_blank">@${row.username}</a></td>
+        <td>
+          <a class="username-link" href="https://www.threads.com/@${row.username}" target="_blank">@${row.username}</a>
+          ${nameHtml}
+        </td>
         <td>${row.followsBack
           ? '<span class="badge badge-yes">有回追</span>'
           : '<span class="badge badge-no">未回追</span>'
@@ -95,6 +113,12 @@
       `顯示 ${filtered.length} / ${reportData.length} 位`;
   }
 
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
   // Filter buttons
   document.getElementById("filter-bar").addEventListener("click", (e) => {
     if (!e.target.classList.contains("filter-btn")) return;
@@ -104,7 +128,7 @@
     renderTable();
   });
 
-  // Search
+  // Search (also searches display name)
   searchInput.addEventListener("input", () => {
     renderTable();
   });
@@ -116,8 +140,11 @@
       alert("目前沒有資料可匯出");
       return;
     }
-    const header = "Username,FollowsBack";
-    const rows = filtered.map((r) => `${r.username},${r.followsBack ? "Yes" : "No"}`);
+    const header = "Username,DisplayName,FollowsBack";
+    const rows = filtered.map((r) => {
+      const name = r.displayName.includes(",") ? `"${r.displayName}"` : r.displayName;
+      return `${r.username},${name},${r.followsBack ? "Yes" : "No"}`;
+    });
     const csv = [header, ...rows].join("\n");
     const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);

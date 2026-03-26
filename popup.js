@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnClear = document.getElementById("btn-clear");
   const followingStatus = document.getElementById("following-status");
   const followersStatus = document.getElementById("followers-status");
+  const tabHint = document.getElementById("tab-hint");
 
   // Load saved data counts on popup open
   chrome.storage.local.get(["followingList", "followersList"], (data) => {
@@ -18,6 +19,51 @@ document.addEventListener("DOMContentLoaded", () => {
       btnClear.style.display = "inline-block";
     }
   });
+
+  // Detect which tab is active and update buttons accordingly
+  detectAndUpdateButtons();
+
+  function detectAndUpdateButtons() {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const tab = tabs[0];
+      if (!tab || !tab.url || !(tab.url.includes("threads.net") || tab.url.includes("threads.com"))) {
+        setTabState("no-threads");
+        return;
+      }
+
+      chrome.tabs.sendMessage(tab.id, { action: "detectTab" }, (response) => {
+        if (chrome.runtime.lastError || !response) {
+          setTabState("no-modal");
+          return;
+        }
+        setTabState(response.activeTab);
+      });
+    });
+  }
+
+  function setTabState(activeTab) {
+    // Reset
+    btnScanFollowing.disabled = false;
+    btnScanFollowers.disabled = false;
+
+    if (activeTab === "no-threads") {
+      tabHint.innerHTML = `<span class="hint-warn">請先開啟 Threads 頁面</span>`;
+      btnScanFollowing.disabled = true;
+      btnScanFollowers.disabled = true;
+    } else if (activeTab === "none" || activeTab === "no-modal") {
+      tabHint.innerHTML = `<span class="hint-warn">未偵測到追蹤列表，請先打開「粉絲」或「追蹤中」</span>`;
+      btnScanFollowing.disabled = true;
+      btnScanFollowers.disabled = true;
+    } else if (activeTab === "following") {
+      tabHint.innerHTML = `<span class="hint-ok">目前在「追蹤中」分頁</span>`;
+      btnScanFollowing.disabled = false;
+      btnScanFollowers.disabled = true;
+    } else if (activeTab === "followers") {
+      tabHint.innerHTML = `<span class="hint-ok">目前在「粉絲」分頁</span>`;
+      btnScanFollowing.disabled = true;
+      btnScanFollowers.disabled = false;
+    }
+  }
 
   function sendScanMessage(type, statusEl, btn) {
     btn.disabled = true;
