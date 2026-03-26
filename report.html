@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Threads Follow Checker - Report</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Threads Follow Checker</h1>
+      <p class="subtitle">追蹤回追報告</p>
+    </header>
+
+    <div id="loading">載入資料中...</div>
+
+    <div id="content" style="display:none;">
+      <div id="summary" class="summary"></div>
+
+      <div class="toolbar">
+        <div id="filter-bar">
+          <button class="filter-btn active" data-filter="all">全部</button>
+          <button class="filter-btn" data-filter="not-following-back">未回追</button>
+          <button class="filter-btn" data-filter="following-back">有回追</button>
+        </div>
+        <div class="actions">
+          <input type="text" id="search" placeholder="搜尋用戶名..." />
+          <button id="btn-export" class="btn btn-secondary">匯出 CSV</button>
+        </div>
+      </div>
+
+      <div id="report-table-wrapper">
+        <table id="report-table">
+          <thead>
+            <tr>
+              <th class="col-num">#</th>
+              <th class="col-user">用戶名</th>
+              <th class="col-status">回追狀態</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div id="footer">
+        <span id="shown-count"></span>
+      </div>
+    </div>
+
+    <div id="no-data" style="display:none;">
+      <p>尚無資料。請先透過 Extension 彈出視窗掃描 Following 和 Followers 名單。</p>
+    </div>
+  </div>
+  <script src="report.js"></script>
+</body>
+</html>

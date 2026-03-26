@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Threads Follow Checker",
+  "version": "1.0.0",
+  "description": "Check if people you follow on Threads also follow you back",
+  "permissions": ["activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icon48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.threads.net/*", "*://www.threads.com/*", "*://threads.net/*", "*://threads.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Threads Follow Checker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Threads Follow Checker</h1>
+      <p class="subtitle">檢查追蹤對象是否有回追你</p>
+    </header>
+
+    <!-- Step 1: Scan Following -->
+    <section id="step1" class="step">
+      <div class="step-header">
+        <span class="step-num">1</span>
+        <span class="step-title">掃描你的追蹤名單 (Following)</span>
+      </div>
+      <p class="step-desc">請先在 Threads 開啟你的個人檔案，點擊「追蹤中」打開列表，然後按下方按鈕。</p>
+      <button id="btn-scan-following" class="btn btn-primary">開始掃描 Following</button>
+      <div id="following-status" class="status"></div>
+    </section>
+
+    <!-- Step 2: Scan Followers -->
+    <section id="step2" class="step">
+      <div class="step-header">
+        <span class="step-num">2</span>
+        <span class="step-title">掃描你的粉絲名單 (Followers)</span>
+      </div>
+      <p class="step-desc">現在請點擊「粉絲」打開列表，然後按下方按鈕。</p>
+      <button id="btn-scan-followers" class="btn btn-primary">開始掃描 Followers</button>
+      <div id="followers-status" class="status"></div>
+    </section>
+
+    <!-- Step 3: Report -->
+    <section id="step3" class="step">
+      <div class="step-header">
+        <span class="step-num">3</span>
+        <span class="step-title">產生報告</span>
+      </div>
+      <button id="btn-report" class="btn btn-accent">產生報告 (開新分頁)</button>
+      <button id="btn-clear" class="btn btn-danger" style="display:none;">清除資料</button>
+    </section>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
